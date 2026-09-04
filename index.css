@@ -88,34 +88,39 @@ table.calendar th {
     color: var(--muted);
 }
 
-table.calendar td {
-    padding: .5rem .75rem;
-    vertical-align: baseline;
-}
+table.calendar td { vertical-align: baseline; }
 
-/* one <tbody> per meeting, so a date with two talks stays in one band */
-table.calendar tbody:nth-of-type(odd) td { background-color: var(--cloud-dark); }
-
-table.calendar tbody tr:first-child td { padding-top: .7rem; }
-table.calendar tbody tr:last-child td { padding-bottom: .7rem; }
-table.calendar tbody tr + tr td { padding-top: 0; }
-
-table.calendar .col-date { width: 7.5rem; white-space: nowrap; }
-table.calendar .col-room { width: 5rem; }
-table.calendar th.col-room,
-table.calendar td.room { text-align: right; }
+/* One <tbody> per meeting, so a date carrying two talks stays in one band.
+   The band colour sits on the <tbody>, not on its cells, so it survives both
+   the table layout below and the block layout on narrow screens. */
+table.calendar tbody:nth-of-type(odd) { background-color: var(--cloud-dark); }
+table.calendar tbody.next { background-color: rgb(255, 241, 230); }
 
 table.calendar td.date { color: var(--muted); }
 table.calendar td.speaker { font-weight: 600; }
 table.calendar td.room { color: var(--muted); }
-
-/* the upcoming meeting */
-table.calendar tbody.next td { background-color: rgb(255, 241, 230); }
-table.calendar tbody.next tr:first-child td:first-child { box-shadow: inset 3px 0 0 var(--illini-orange); }
 table.calendar tbody.next td.date { color: inherit; font-weight: 600; }
 
 /* a break or cancelled week */
 table.calendar tbody.off td { color: var(--muted); font-style: italic; }
+
+/* Cell padding and column widths belong to the table layout only. They live in
+   a min-width query rather than being overridden below, because a media query
+   adds no specificity: `tbody tr:first-child td` would otherwise outrank the
+   narrow-screen reset and leave stray padding on every stacked line. */
+@media (min-width: 768px) {
+    table.calendar td { padding: .5rem .75rem; }
+    table.calendar tbody tr:first-child td { padding-top: .7rem; }
+    table.calendar tbody tr:last-child td { padding-bottom: .7rem; }
+    table.calendar tbody tr + tr td { padding-top: 0; }
+
+    table.calendar .col-date { width: 7.5rem; white-space: nowrap; }
+    table.calendar .col-room { width: 5rem; }
+    table.calendar th.col-room,
+    table.calendar td.room { text-align: right; }
+
+    table.calendar tbody.next tr:first-child td:first-child { box-shadow: inset 3px 0 0 var(--illini-orange); }
+}
 
 .badge-next,
 .badge-external {
@@ -159,10 +164,11 @@ footer {
     table.calendar tr,
     table.calendar td { display: block; width: auto; }
 
+    table.calendar { margin-top: .5rem; }
     table.calendar tbody { padding: .6rem .75rem; }
-    table.calendar tbody:nth-of-type(odd) { background-color: var(--cloud-dark); }
-    table.calendar td { background-color: transparent; padding: 0; }
-    table.calendar tr + tr { margin-top: .6rem; }
+    table.calendar td { padding: 0; }
+    table.calendar tbody + tbody { margin-top: .25rem; }
+    table.calendar tr + tr { margin-top: .5rem; }
     table.calendar td:empty { display: none; }
 
     table.calendar td.date {
@@ -170,12 +176,12 @@ footer {
         font-weight: 600;
         letter-spacing: .06em;
         text-transform: uppercase;
+        margin-bottom: .15rem;
     }
 
-    table.calendar td.room { text-align: left; font-size: .875rem; }
+    table.calendar td.room { font-size: .875rem; margin-top: .15rem; }
     table.calendar td.room:not(:empty)::before { content: "Room "; }
     table.calendar tbody.off td.room { display: none; }
 
-    table.calendar tbody.next { background-color: rgb(255, 241, 230); box-shadow: inset 3px 0 0 var(--illini-orange); }
-    table.calendar tbody.next tr:first-child td:first-child { box-shadow: none; }
+    table.calendar tbody.next { box-shadow: inset 3px 0 0 var(--illini-orange); }
 }
