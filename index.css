@@ -115,7 +115,7 @@ table.calendar tbody.off td { color: var(--muted); font-style: italic; }
     table.calendar tbody tr + tr td { padding-top: 0; }
 
     table.calendar .col-date { width: 7.5rem; white-space: nowrap; }
-    table.calendar .col-room { width: 5rem; }
+    table.calendar .col-room { width: 6.5rem; white-space: nowrap; }
     table.calendar th.col-room,
     table.calendar td.room { text-align: right; }
 
