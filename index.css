@@ -93,8 +93,8 @@ table.calendar td { vertical-align: baseline; }
 /* One <tbody> per meeting, so a date carrying two talks stays in one band.
    The band colour sits on the <tbody>, not on its cells, so it survives both
    the table layout below and the block layout on narrow screens. */
-table.calendar tbody:nth-of-type(odd) { background-color: var(--cloud-dark); }
-table.calendar tbody.next { background-color: rgb(255, 241, 230); }
+table.calendar tbody:nth-of-type(odd) { background-color: rgba(19, 41, 75, .035); }
+table.calendar tbody.next { background-color: rgba(255, 95, 5, .06); }
 
 table.calendar td.date { color: var(--muted); }
 table.calendar td.speaker { font-weight: 600; }
@@ -119,6 +119,7 @@ table.calendar tbody.off td { color: var(--muted); font-style: italic; }
     table.calendar th.col-room,
     table.calendar td.room { text-align: right; }
 
+    table.calendar tbody + tbody > tr:first-child > td { border-top: 1px solid var(--cloud-dark); }
     table.calendar tbody.next tr:first-child td:first-child { box-shadow: inset 3px 0 0 var(--illini-orange); }
 }
 
