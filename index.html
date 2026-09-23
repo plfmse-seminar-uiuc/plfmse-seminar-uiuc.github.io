@@ -91,18 +91,29 @@
         </thead>
 
         <!-- ==================================================================
-             One <tbody> per meeting. A meeting with two talks holds two <tr>s
-             in the same <tbody>, which keeps them in one shaded band; leave the
-             date and room cells of the second <tr> empty.
+             One <tbody> per meeting. A meeting with two speakers holds two
+             <tr>s in the same <tbody>, which keeps them in one shaded band.
+             Give the date and room cells rowspan="2" on the first <tr> and
+             drop them from the second <tr> entirely, so each spans both
+             speakers and centers against the full two-row block instead of
+             repeating (see the Oct 14 example below).
 
              <tbody>
                <tr>
-                 <td class="date">Sep 9</td>
+                 <td class="date" rowspan="2">Sep 9</td>
                  <td class="speaker">Speaker Name</td>
                  <td><a target="_blank" href="https://link/to/paper">Talk title</a></td>
-                 <td class="room">3102</td>
+                 <td class="room" rowspan="2">3102</td>
+               </tr>
+               <tr>
+                 <td class="speaker">Second Speaker</td>
+                 <td><a target="_blank" href="https://link/to/paper">Second talk title</a></td>
                </tr>
              </tbody>
+
+             A single speaker giving two talks stays in one <tr>; wrap each
+             title in its own <div class="talk-title"> inside the topic <td>
+             so they stack instead of running together (see Sep 23 below).
 
              Add class="next" to the <tbody> of the upcoming meeting, and put
              <span class="badge-next">Next</span> after that speaker's name.
@@ -132,7 +143,10 @@
           <tr>
             <td class="date">Sep 23</td>
             <td class="speaker"><a href="https://mir.cs.illinois.edu/marinov/" target="_blank" rel="noopener noreferrer">Prof. Darko Marinov</a><span class="badge-next">Next</span></td>
-            <td>TBA</td>
+            <td>
+              <div class="talk-title">The Discreet Charm of the Bugeoisie: A First Look at Bug Reports Created by Researchers</div>
+              <div class="talk-title">Re-evaluating Detection of Equivalent Mutants Using LLMs: We Should Properly Measure How Far We Are</div>
+            </td>
             <td class="room">2406 SC</td>
           </tr>
         </tbody>
@@ -164,6 +178,19 @@
           </tr>
         </tbody>
 
+        <!-- <tbody>
+          <tr>
+            <td class="date" rowspan="2">Oct 14</td>
+            <td class="speaker">TBD</td>
+            <td>TBD</td>
+            <td class="room" rowspan="2">2406 SC</td>
+          </tr>
+          <tr>
+            <td class="speaker">TBD</td>
+            <td>TBD</td>
+          </tr>
+        </tbody> -->
+        
         <tbody>
           <tr>
             <td class="date">Oct 21</td>
