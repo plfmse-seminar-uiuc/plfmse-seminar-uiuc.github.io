@@ -6,18 +6,22 @@
 
 :root {
     --illini-blue: rgb(19, 41, 75);
-    --illini-orange: rgb(255, 95, 5);
-    --cloud: rgb(248, 250, 252);
-    --cloud-dark: rgb(232, 233, 235);
-    --muted: #626873;
+    --illini-blue-deep: rgb(9, 21, 42);
+    --illini-orange: rgb(199, 92, 28);
+    --illini-orange-deep: rgb(150, 66, 15);
+    --accent-next: rgb(37, 99, 164);
+    --accent-next-deep: rgb(22, 68, 118);
+    --cloud: rgb(247, 248, 250);
+    --cloud-dark: rgb(224, 227, 232);
+    --muted: #5b6270;
 }
 
 body { background-color: var(--cloud); }
 
 #header {
-    background-color: var(--illini-blue);
+    background: linear-gradient(135deg, var(--illini-blue), var(--illini-blue-deep));
     color: white;
-    border-bottom: 4px solid var(--illini-orange);
+    border-bottom: 3px solid var(--illini-orange);
 }
 
 #header .lead { color: rgb(197, 208, 224); }
@@ -99,11 +103,10 @@ table.calendar tr:has(.talk-title + .talk-title) td { vertical-align: middle; }
    sit at the baseline of the first speaker's row alone. */
 table.calendar td[rowspan] { vertical-align: middle; }
 
-/* One <tbody> per meeting, so a date carrying two talks stays in one band.
-   The band colour sits on the <tbody>, not on its cells, so it survives both
-   the table layout below and the block layout on narrow screens. */
-table.calendar tbody:nth-of-type(odd) { background-color: rgba(19, 41, 75, .035); }
-table.calendar tbody.next { background-color: rgba(255, 95, 5, .06); }
+/* One <tbody> per meeting; the border between tbodies (below) is what
+   separates meetings, so no zebra striping is needed here. The upcoming
+   meeting still gets a faint tint to draw the eye. */
+table.calendar tbody.next { background-color: rgba(37, 99, 164, .06); }
 
 table.calendar td.date { color: var(--muted); }
 table.calendar td.speaker { font-weight: 600; }
@@ -120,7 +123,6 @@ table.calendar tbody.next td.date { color: inherit; font-weight: 600; }
 }
 
 /* a break or cancelled week */
-table.calendar tbody.off td { color: var(--muted); font-style: italic; }
 
 /* Cell padding and column widths belong to the table layout only. They live in
    a min-width query rather than being overridden below, because a media query
@@ -144,7 +146,7 @@ table.calendar tbody.off td { color: var(--muted); font-style: italic; }
     table.calendar td.room { text-align: right; }
 
     table.calendar tbody + tbody > tr:first-child > td { border-top: 1px solid var(--cloud-dark); }
-    table.calendar tbody.next tr:first-child td:first-child { box-shadow: inset 3px 0 0 var(--illini-orange); }
+    table.calendar tbody.next tr:first-child td:first-child { box-shadow: inset 3px 0 0 var(--accent-next); }
 }
 
 .badge-next,
@@ -154,15 +156,18 @@ table.calendar tbody.off td { color: var(--muted); font-style: italic; }
     font-weight: 600;
     letter-spacing: .06em;
     text-transform: uppercase;
-    border: 1px solid currentColor;
-    border-radius: 2px;
-    padding: 0 .3rem;
     margin-left: .35rem;
     vertical-align: .12em;
 }
 
-.badge-next { color: #b03f00; }
-.badge-external { color: var(--illini-blue); }
+.badge-next { color: var(--accent-next-deep); }
+
+.badge-external {
+    color: var(--illini-blue);
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    padding: 0 .3rem;
+}
 
 
 /* ---------------- misc ---------------- */
@@ -212,5 +217,5 @@ footer {
     table.calendar td.room:not(:empty)::before { content: "Room "; }
     table.calendar tbody.off td.room { display: none; }
 
-    table.calendar tbody.next { box-shadow: inset 3px 0 0 var(--illini-orange); }
+    table.calendar tbody.next { box-shadow: inset 3px 0 0 var(--accent-next); }
 }
